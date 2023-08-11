@@ -1,6 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Protection from '../utils/ProtecRouter';
+import Link from 'next/link';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,9 +16,20 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <Protection>
+      <body className={inter.className}>
+          <main className='w-screen h-screen flex flex-col items-center justify-center'>
+            <nav className='w-screen h-14 absolute top-0 flex justify-evenly items-center'>
+              <Link className='w-fir h-fit p-2 border-[1px] border-zinc-700 rounded-lg bg-white cursor-pointer' href={"/user"}>User</Link>
+              <Link className='w-fir h-fit p-2 border-[1px] border-zinc-700 rounded-lg bg-white cursor-pointer' href={"/contacts"}>Contacts</Link>
+            </nav>
+            {children}
+          </main>  
+        </body>
+      </Protection>
     </html>
   )
 }
